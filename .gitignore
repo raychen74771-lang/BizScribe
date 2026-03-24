@@ -1,0 +1,45 @@
+# ========================
+# FlowScribe V9.4 防弹衣
+# ========================
+
+# 1. 绝对机密 (API Keys & Configs)
+.env
+config.json
+keys.txt
+secrets/
+
+# 2. 编译与打包黑洞 (PyInstaller)
+build/
+dist/
+*.spec
+build_lite_env/
+
+# 3. 缓存与临时文件 (Python)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# 4. 音频与物理资产 (防止仓库被撑爆)
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.aac
+temp_audio/
+output/
+logs/
+
+# 5. 操作系统垃圾
+.DS_Store
+Thumbs.db
+
+config.yaml
+*.exe
+一键脚本/
+GIT/
+版本A.txt
