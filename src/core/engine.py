@@ -70,11 +70,36 @@ def run_pipeline(api_key, style_file_path=None, target_lang="简体中文", prog
                 state["results"][slice_name]["refined"] = provider.refine_text(state["results"][slice_name]["raw"], style_text, target_lang)
                 with open(state_file, 'w', encoding='utf-8') as f: json.dump(state, f)
 
-        final_md = os.path.join(work_dir, f"{base_name}_Final.md")
-        merged_text = [state["results"][os.path.basename(s)]["refined"] for s in slices]
-        full_text = "\n\n".join(merged_text)
-        with open(final_md, 'w', encoding='utf-8') as f: f.write(f"# {base_name}\n\n{full_text}")
-        all_finals.append(f"# {base_name}\n\n{full_text}")
+        final_md = os.path.join(work_dir, f"{base_name}_Executive_Summary.md")
+        
+        # 解析并合并所有的 JSON 切片
+        merged_summary = []
+        merged_decisions = []
+        merged_actions = []
+        merged_risks = []
+        
+        for s in slices:
+            raw_json_str = state["results"][os.path.basename(s)]["refined"]
+            # 兼容大模型偶尔带 ```json 的输出
+            clean_str = raw_json_str.replace("```json", "").replace("```", "").strip()
+            try:
+                data = json.loads(clean_str)
+                if data.get("summary"): merged_summary.append(data.get("summary"))
+                merged_decisions.extend(data.get("decisions", []))
+                merged_actions.extend(data.get("action_items", []))
+                merged_risks.extend(data.get("risks", []))
+            except Exception as e:
+                merged_summary.append(f"[JSON Parse Error in slice: {clean_str}]")
+
+        # 组装为高管战报 (Executive Summary)
+        md_content = f"# 📄 {base_name} | 商业决议与权责追踪单\n\n"
+        md_content += "## 🎯 核心议题摘要 (Executive Summary)\n> " + " ".join(merged_summary) + "\n\n"
+        md_content += "## 🤝 已决议事项 (Decisions Made)\n" + "\n".join([f"- {x}" for x in merged_decisions]) + "\n\n"
+        md_content += "## ⚔️ 执行契约 (Action Items)\n" + "\n".join([f"- [ ] **{x}**" for x in merged_actions]) + "\n\n"
+        md_content += "## 🚨 商业与风控预警 (Risk Warnings)\n" + "\n".join([f"- ⚠️ {x}" for x in merged_risks]) + "\n\n"
+        
+        with open(final_md, 'w', encoding='utf-8') as f: f.write(md_content)
+        all_finals.append(md_content)
 
     if all_finals:
         with open(os.path.join(output_dir, "FINAL_BOOK_All.md"), 'w', encoding='utf-8') as f:

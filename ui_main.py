@@ -37,7 +37,7 @@ import glob
 
 I18N = {
     "zh": {
-        "title": "FlowScribe 音频转换", "settings": "⚙️ 设置", "style_btn": "🎭 讲员风格",
+        "title": "BizScribe 商业契约坍缩引擎", "settings": "⚙️ 设置", "style_btn": "⚖️ 前置契约/SOW",
         "drop_text": "请点击下方按钮添加需转译的音频\n(支持格式: .mp3, .wav, .m4a)",
         "add_btn": "➕ 添加本地音频", "files_count": "当前待处理音频: {} 个",
         "target_lang": "输出语言:", "status_wait": "等待开始...",
@@ -45,7 +45,7 @@ I18N = {
         "set_title": "⚙️ 设置", "set_save": "保存并关闭"
     },
     "en": {
-        "title": "FlowScribe Audio Engine", "settings": "⚙️ Settings", "style_btn": "🎭 Speaker Style",
+        "title": "BizScribe Contract Engine", "settings": "⚙️ Settings", "style_btn": "⚖️ Prior SOW/Context",
         "drop_text": "Click below to add audio files\n(Supported: .mp3, .wav, .m4a)",
         "add_btn": "➕ Add Local Audio", "files_count": "Pending Files: {}",
         "target_lang": "Output:", "status_wait": "Waiting...",
@@ -80,7 +80,7 @@ class FlowScribeApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.current_lang = "zh"
-        self.title("FlowScribe V8.0 Global")
+        self.title("BizScribe Enterprise V1.0")
         self.geometry("620x500") 
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")

@@ -24,25 +24,41 @@ class DualEngineProvider:
 
     def refine_text(self, raw_text, style_text="", target_lang="简体中文"):
         system_prompt = (
-            f"You are a top-tier theological editor and proofreader.\n"
-            f"Below is a rough transcription of a sermon (potentially multi-lingual).\n"
-            f"Your CORE TASK is to translate, refine, and format this into publication-ready 【{target_lang}】.\n\n"
-            f"RULES:\n"
-            f"1. OUTPUT LANGUAGE: The final output MUST be purely in {target_lang}. Do not leave original foreign words unless they are universally accepted theological terms.\n"
-            f"2. THEOLOGICAL ACCURACY: Correct any homophone errors or mistranscribed theological terms. Ensure they match the standard Bible translation.\n"
-            f"3. PUBLICATION QUALITY: Merge broken sentences, remove spoken redundancies, and ensure logical flow.\n"
-            # 🎯 V9.2 柔性约束：禁止脑补小标题，要求自然连贯
-            f"4. NATURAL FLOW (NO TAGS): Do NOT add any artificial subtitles, bracketed tags (e.g., 【讲道精编】, 【经文默想】), or paragraph summaries. Just output the continuous sermon text naturally.\n"
-            f"5. NO CHITCHAT: Output ONLY the refined text. No explanations."
+            f"You are a ruthless Corporate Project Manager and Risk Analyst.
+"
+            f"Below is a rough transcription of a business meeting (potentially multi-lingual).
+"
+            f"Your CORE TASK is to COLLAPSE this chaotic conversation into a strict JSON contract in 【{target_lang}】.
+
+"
+            f"RULES:
+"
+            f"1. OUTPUT FORMAT: You MUST output ONLY valid JSON. No markdown wrappers like ```json, no explanations.
+"
+            f"2. JSON SCHEMA:
+"
+            f"{{
+"
+            f"  \"summary\": \"100字以内的核心商业目标总结\",
+"
+            f"  \"decisions\": [\"决议事项1\", \"决议事项2\"],
+"
+            f"  \"action_items\": [\"@责任人: 截止时间 - 具体任务\"],
+"
+            f"  \"risks\": [\"识别出的合规、预算或推诿风险（若无则填无）\"]
+"
+            f"}}
+"
+            f"3. OBJECTIVITY: Filter out all chitchat, emotions, and polite nonsense. Extract ONLY actionable business data."
         )
         
         if style_text:
             system_prompt += (
                 "\n\n[STYLE CLONING DIRECTIVE]\n"
-                "The following <style_reference> contains past sermons of this speaker.\n"
-                "WARNING: You MUST ONLY learn their 'tone, sentence rhythm, and stylistic preferences'.\n"
+                "The following <context> contains past sermons of this speaker.\n"
+                "WARNING: The following <context> is the Prior SOW, Contract, or Business Background. Use this to detect if any decisions in the meeting violate these prior rules!\n"
                 "CRITICAL: DO NOT hallucinate or mix specific stories, names, or theological arguments from the reference into the current transcription!\n"
-                f"<style_reference>\n{style_text[:5000]}\n</style_reference>"
+                f"<context>\n{style_text[:5000]}\n</context>"
             )
         
         last_err = ""
