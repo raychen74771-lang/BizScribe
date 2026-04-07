@@ -4,7 +4,7 @@ from src.core.engine import run_pipeline
 
 if __name__ == "__main__":
     print("="*50)
-    print("🚀 FlowScribe V7 (双引擎降落版) 启动")
+    print("🚀 BizScribe V1.0 (契约坍缩引擎) 启动")
     print("="*50)
     
     # 🎯 核心修复：自动读取根目录的 .env 文件

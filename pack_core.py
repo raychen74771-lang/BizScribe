@@ -1,4 +1,4 @@
-# L1 物理操作指令：提取 FlowScribe 核心拓扑代码
+# L1 物理操作指令：提取 BizScribe 核心拓扑代码
 import os
 
 # 仅捕获核心引擎、UI入口与配置文件

@@ -2,7 +2,7 @@ import sys
 import os
 
 # ==========================================
-# 🛡️ 恩流 (FlowScribe) - 工业级防弹启动器 (V9.4)
+# 🛡️ 商录 (BizScribe) - 工业级防弹启动器 (V1.0)
 # ==========================================
 # 1. 修复 PyInstaller 无头模式下的 NoneType write 崩溃
 class DummyStream:
@@ -76,7 +76,7 @@ class SettingsDialog(ctk.CTkToplevel):
         self.master_app.api_key = new_key
         self.destroy()
 
-class FlowScribeApp(ctk.CTk):
+class BizScribeApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.current_lang = "zh"
@@ -238,5 +238,5 @@ class FlowScribeApp(ctk.CTk):
         os.startfile(out_dir)
 
 if __name__ == "__main__":
-    app = FlowScribeApp()
+    app = BizScribeApp()
     app.mainloop()

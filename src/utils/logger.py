@@ -10,7 +10,7 @@ def setup_logger(level="INFO"):
     workspace_dir = os.path.join(os.getcwd(), "workspace")
     os.makedirs(workspace_dir, exist_ok=True)
     
-    log_file_path = os.path.join(workspace_dir, "flowscribe_audit.log")
+    log_file_path = os.path.join(workspace_dir, "bizscribe_audit.log")
     
     # 💎 FileHandler: 永久记录到本地文件 (黑匣子)
     file_handler = logging.FileHandler(log_file_path, encoding="utf-8")
@@ -30,11 +30,11 @@ def setup_logger(level="INFO"):
     )
     
     # 获取专属 logger
-    logger = logging.getLogger("flowscribe")
+    logger = logging.getLogger("bizscribe")
     
     # 每次启动时在日志文件里打个标记，方便你查阅
     logger.info("="*40)
-    logger.info("🚀 FlowScribe 审计日志系统已启动")
+    logger.info("🚀 BizScribe 审计日志系统已启动")
     logger.info("="*40)
     
     return logger
